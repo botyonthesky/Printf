@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "ft_printf.h"
+#include "../libft/libft.h"
+#include "../includes/ft_printf.h"
 
 char	*ft_convert(unsigned int x, char *set)
 {

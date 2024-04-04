@@ -10,46 +10,76 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= libftprintf.a
+NAME 						= libftprintf.a
 
-SRC_DIR 	= ./srcs/
+SRC_DIR 					= ./srcs/
 
-INC_DIR 	= ./includes/
+SRC_BONUS_DIR 				= ./srcs_bonus/
 
-LIB_DIR		= ./libft/
+OBJ_DIR						= ./srcs/objs/
 
-SRC 		= ft_printf ft_convert ft_check ft_putchar_p ft_putnbr_p ft_put_memory_adress ft_putstr_p
+OBJ_BONUS_DIR				= ./srcs_bonus/objs/
 
-SRCS 		= $(addprefix ${SRC_DIR}, $(addsuffix .c, ${SRC}))
+INC_DIR 					= ./includes/
 
-HEAD		= ./includes/
+INC_BONUS_DIR 				= ./srcs_bonus/include
 
-OBJS 		= ${SRCS:.c=.o}
+LIB_DIR						= ./libft/
 
-LIB_NAME	= libft.a
+SRC 						= ft_printf ft_convert ft_check ft_putchar_p ft_putnbr_p \
+								ft_put_memory_adress ft_putstr_p
 
-CC	= cc
-RM	= rm -f
-CFLAGS	= -Wall -Wextra -Werror
+SRCS 						= $(addprefix ${SRC_DIR}, $(addsuffix .c, ${SRC}))
 
-%.o : %.c
-		${CC} ${CFLAGS} -c -I${INC_DIR} -I${LIB_DIR}  $< -o ${<:.c=.o}
+OBJS 						= $(addprefix ${OBJ_DIR}, $(addsuffix .o, ${SRC}))
 
-${NAME} : ${OBJS}
-		cd ${LIB_DIR} && ${MAKE} && cp -v ${LIB_NAME} ../${NAME}
-		ar rcs ${NAME} ${OBJS}
+SRC_BONUS					= ft_printf ft_check ft_putchar_p ft_putnbr_p \
+								ft_putstr_p ft_utils ft_flags ft_short ft_manage_p \
+								ft_manage_u ft_manage_x ft_len
 
-all :	${NAME}
+SRCS_BONUS					= $(addprefix ${SRC_BONUS_DIR}, $(addsuffix .c, ${SRC_BONUS}))
 
-clean :
-		${RM} ${OBJS}
-		cd ${LIB_DIR} && ${MAKE} clean
+OBJS_BONUS					= $(addprefix ${OBJ_BONUS_DIR}, $(addsuffix .o, ${SRC_BONUS}))
 
-fclean : clean
-		${RM} ${NAME}
-		cd ${LIB_DIR} && ${MAKE} clean
+HEAD						= ./includes/
+
+HEAD_BONUS					= ./include/
+
+LIB_NAME					= libft.a
+
+CC							= cc
+RM							= rm -f
+CFLAGS						= -Wall -Wextra -Werror -fPIE -MD
+
+${OBJ_DIR}%.o:				${SRC_DIR}%.c | ${OBJ_DIR}
+							$(CC) $(CFLAGS) -c -I${INC_DIR} -I${LIB_DIR} $< -o $@
+
+${OBJ_BONUS_DIR}%.o:		${SRC_BONUS_DIR}%.c | ${OBJ_BONUS_DIR}
+							$(CC) $(CFLAGS) -c -I${INC_BONUS_DIR} -I${LIB_DIR} $< -o $@
+
+${NAME}:					${OBJ_DIR} ${OBJS}
+							cd ${LIB_DIR} && ${MAKE} && cp -v ${LIB_NAME} ../${NAME}
+							ar rcs ${NAME} ${OBJS}
+
+all:						${OBJ_DIR} ${NAME}
+
+bonus:						${OBJ_BONUS_DIR} ${OBJS_BONUS}
+							cd ${LIB_DIR} && ${MAKE} && cp -v ${LIB_NAME} ../${NAME}
+							ar rcs ${NAME} ${OBJS_BONUS}
+
+clean:
+							${RM} ${NAME}
+							${RM} ${OBJS}
+							${RM} ${OBJS_BONUS}
+							$(RM) $(OBJS:.o=.d)
+							cd ${LIB_DIR} && ${MAKE} clean
+
+fclean:						clean
+							cd ${LIB_DIR} && ${MAKE} clean
+							$(RM) $(OBJS:.o=.d)
+							$(RM) $(OBJS_BONUS:.o=.d)
 
 
-re :		fclean ${NAME}
+re:							fclean ${NAME}
 
-.PHONY :	all clean fclean re
+.PHONY:						all clean fclean re bonus

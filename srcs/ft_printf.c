@@ -5,13 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmaillar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/13 14:21:49 by tmaillar          #+#    #+#             */
-/*   Updated: 2023/05/13 14:22:20 by tmaillar         ###   ########.fr       */
+/*   Created: 2023/12/13 10:55:10 by tmaillar          #+#    #+#             */
+/*   Updated: 2023/12/13 10:56:10 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "ft_printf.h"
+#include "../libft/libft.h"
+#include "../includes/ft_printf.h"
 
 int	ft_printf(const char *format, ...)
 {

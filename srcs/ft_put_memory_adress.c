@@ -6,12 +6,12 @@
 /*   By: tmaillar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 15:44:26 by tmaillar          #+#    #+#             */
-/*   Updated: 2023/05/13 14:35:37 by tmaillar         ###   ########.fr       */
+/*   Updated: 2023/12/13 10:54:51 by tmaillar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "libft.h"
+#include "../libft/libft.h"
+#include "../includes/ft_printf.h"
 
 int	ft_put_memory_adress(void *ptr)
 {

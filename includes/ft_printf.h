@@ -18,16 +18,27 @@
 # include <stddef.h>
 # include <stdlib.h>
 
+/*---------------Base---------------------*/
+
 int		ft_printf(const char *s, ...);
-int		ft_check(char c, va_list format);
+char	*ft_convert(unsigned int x, char *set);
+
+/*---------------Shortcut fonctions---------------------*/
+
 int		ft_short_p(va_list fornat);
 int		ft_short_u(va_list format);
 int		ft_short_x(va_list format);
 int		ft_short_gx(va_list format);
+
+/*---------------Specifiers fonctions---------------------*/
+
 int		ft_putchar_p(char c);
 int		ft_putstr_p(char *str);
 int		ft_putnbr_p(int n);
 int		ft_put_memory_adress(void *ptr);
-char	*ft_convert(unsigned int x, char *set);
+
+/*---------------Check---------------------*/
+
+int		ft_check(char c, va_list format);
 
 #endif
